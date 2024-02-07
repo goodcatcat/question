@@ -2,7 +2,7 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
-        String input = "aaabbbccdeeeffffggghhh";
+        String input = "aaabbbbbccdeeeffffggghhh";
         // stage 1
         removeAndPrint(input);
         // stage 2
@@ -42,6 +42,7 @@ public class Main {
 
         if(input == null || input.isEmpty() || !isAllLowerCase(input) ){
             System.out.println("The input parameters is incorrect，Please check it.");
+            return;
         }
 
         if(input.length() < 3 ){
@@ -49,9 +50,10 @@ public class Main {
             return;
         }
 
-        while(true){
+        while(!input.isEmpty()){
             int[] consecutiveRange = findConsecutiveRange(input);
             if(consecutiveRange[0] == -1){
+                System.out.println(input);
                 break;
             }
             String output = input.substring(0,consecutiveRange[0]) + input.substring(consecutiveRange[1]+1,input.length());
@@ -88,13 +90,20 @@ public class Main {
             return;
         }
 
-        while(true){
+        while(!input.isEmpty()){
             int[] consecutiveRange = findConsecutiveRange(input);
             if(consecutiveRange[0] == -1){
+                System.out.println(input);
                 break;
             }
-            String output = input.substring(0,consecutiveRange[0]) + getPreviousLetter(input.charAt(consecutiveRange[0])) + input.substring(consecutiveRange[1]+1,input.length());
-            System.out.println(output);
+            String output = input.substring(0,consecutiveRange[0])
+                    + getPreviousLetter(input.charAt(consecutiveRange[0]))
+                    + input.substring(consecutiveRange[1]+1,input.length());
+            String outputStr = output + ","
+                    + input.substring(consecutiveRange[0],consecutiveRange[1]+1)
+                    + " is replaced by "
+                    + getPreviousLetter(input.charAt(consecutiveRange[0]));
+            System.out.println(outputStr);
             input = output;
         }
 
