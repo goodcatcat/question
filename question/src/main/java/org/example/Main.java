@@ -4,7 +4,7 @@ public class Main {
     public static void main(String[] args) {
         String input = "aaabbbbbccdeeeffffggghhh";
         // stage 1
-        removeAndPrint(input);
+        //removeAndPrint(input);
         // stage 2
         replaceAndPrint(input);
     }
@@ -96,15 +96,11 @@ public class Main {
                 System.out.println(input);
                 break;
             }
-            String output = input.substring(0,consecutiveRange[0])
-                    + getPreviousLetter(input.charAt(consecutiveRange[0]))
-                    + input.substring(consecutiveRange[1]+1,input.length());
-            String outputStr = output + ","
-                    + input.substring(consecutiveRange[0],consecutiveRange[1]+1)
-                    + " is replaced by "
-                    + getPreviousLetter(input.charAt(consecutiveRange[0]));
+            char previousLetter = getPreviousLetter(input.charAt(consecutiveRange[0]));
+            StringBuilder outputB = new StringBuilder(input.substring(0, consecutiveRange[0])).append(previousLetter).append(input.substring(consecutiveRange[1] + 1, input.length()));
+            StringBuilder outputStr = new StringBuilder(outputB).append(",").append(input.substring(consecutiveRange[0], consecutiveRange[1] + 1)).append(" is replaced by ").append(previousLetter);
             System.out.println(outputStr);
-            input = output;
+            input = outputB.toString();
         }
 
     }
